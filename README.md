@@ -1,5 +1,5 @@
 
-# React CRT Boot Loader
+# React CRT Post Screen
 
 A retro DOS-style CRT loading screen transition created with React and Tailwind CSS, mimicking a vintage computer boot-up sequence. This component provides a nostalgic and engaging loading experience for any web application.
 ---
