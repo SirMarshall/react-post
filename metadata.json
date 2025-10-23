@@ -1,0 +1,5 @@
+{
+  "name": "CRT Boot Loader",
+  "description": "A retro DOS-style CRT loading screen transition created with React and Tailwind CSS, mimicking a vintage computer boot-up sequence.",
+  "requestFramePermissions": []
+}

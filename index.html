@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRT Boot Loader</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'VT323', monospace;
+        background-color: #0c0c0c;
+      }
+      @keyframes flicker {
+        0%, 100% { opacity: 1; }
+        50.1% { opacity: 0.9; }
+        50.2% { opacity: 1; }
+        75.1% { opacity: 0.95; }
+        75.2% { opacity: 1; }
+      }
+      @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+      }
+      @keyframes crt-off {
+        0% { 
+          transform: scaleY(1);
+          opacity: 1;
+        }
+        40% {
+           transform: scaleY(1);
+          opacity: 1;
+        }
+        70% {
+          transform: scaleY(0.005) translateX(0);
+          opacity: 1;
+        }
+        71% {
+          transform: scaleY(0.005) translateX(10px);
+          opacity: 1;
+        }
+        72% {
+          transform: scaleY(0.005) translateX(0);
+          opacity: 1;
+        }
+        99% {
+          transform: scaleY(0.005);
+          opacity: 1;
+        }
+        100% {
+          transform: scaleY(0.005);
+          opacity: 0;
+        }
+      }
+      @keyframes scanline {
+        0% { transform: translateY(-10vh); }
+        100% { transform: translateY(110vh); }
+      }
+      .animate-flicker {
+        animation: flicker 1.5s infinite;
+      }
+      .animate-blink {
+        animation: blink 1s step-end infinite;
+      }
+      .animate-crt-off {
+        animation: crt-off 1.2s forwards;
+      }
+      .animate-scanline {
+        animation: scanline 2.5s linear infinite;
+      }
+      /* New styles for convex effect */
+      .crt-convex-effect {
+        position: relative;
+        overflow: hidden;
+        border-radius: 1.5rem; /* Curve the corners like a monitor bezel */
+      }
+      .crt-convex-effect::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        /* A subtle gradient to create a bright center and dark edges */
+        background: radial-gradient(circle at center, rgba(180, 255, 180, 0.05) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.5) 90%, rgba(0,0,0,0.9) 100%);
+        pointer-events: none;
+        z-index: 10;
+        border-radius: inherit;
+      }
+      .crt-convex-effect::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        /* Inset shadow to deepen the convex illusion */
+        box-shadow: inset 0 0 80px 20px rgba(0,0,0,0.7);
+        pointer-events: none;
+        z-index: 11;
+        border-radius: inherit;
+      }
+      .crt-content-magnified {
+        transform: scale(1.08); /* Magnify the content */
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
